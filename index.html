@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>20/10</title>
+	<style>
+		* { box-sizing: border-box; }
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: grid;
+			place-items: center;
+			overflow: hidden;
+			font-family: Arial, sans-serif;
+			background:
+				radial-gradient(circle at 15% 35%, #ffffffaa 0 3px, transparent 4px),
+				radial-gradient(circle at 82% 68%, #ffffffaa 0 4px, transparent 5px),
+				linear-gradient(135deg, #fff0f5, #ffe3ed 55%, #fff5f8);
+			background-size: 42px 42px, 58px 58px, 100% 100%;
+		}
+		.decorations {
+			position: fixed;
+			inset: 0;
+			z-index: 0;
+			pointer-events: none;
+		}
+		.decorations svg {
+			position: absolute;
+			filter: drop-shadow(0 5px 8px #d6338430);
+		}
+		.heart-one { width: clamp(54px, 8vw, 88px); left: 12%; top: 14%; transform: rotate(-12deg); }
+		.heart-two { width: clamp(44px, 6vw, 64px); right: 14%; top: 18%; transform: rotate(14deg); }
+		.flower { width: clamp(62px, 8vw, 86px); right: 10%; bottom: 12%; }
+		.sparkle { width: clamp(28px, 4vw, 40px); left: 17%; bottom: 18%; }
+		.heart-three { width: clamp(42px, 5vw, 58px); left: 31%; top: 17%; transform: rotate(10deg); }
+		.heart-four { width: clamp(46px, 6vw, 64px); right: 29%; bottom: 17%; transform: rotate(-8deg); }
+		.flower-small { width: clamp(50px, 6vw, 68px); left: 8%; bottom: 11%; }
+		.sparkle-two { width: clamp(24px, 3vw, 32px); right: 25%; top: 46%; }
+		.sparkle-three { width: clamp(20px, 2.5vw, 28px); left: 35%; bottom: 12%; }
+		main { position: relative; z-index: 1; text-align: center; padding: 24px; }
+		h1 {
+			color: #d63384;
+			font-size: clamp(2rem, 7vw, 4rem);
+			animation: float 3s ease-in-out infinite;
+		}
+		@keyframes float {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-12px); }
+		}
+		.buttons { display: flex; justify-content: center; gap: 20px; }
+		button {
+			border: 0;
+			border-radius: 10px;
+			padding: 12px 28px;
+			font-size: 1.2rem;
+			cursor: pointer;
+		}
+		#yes { color: #fff; background: #e64980; }
+		#no { background: #dee2e6; }
+		#no { transition: left 350ms ease, top 350ms ease; }
+	</style>
+</head>
+<body>
+	<div class="decorations" aria-hidden="true">
+		<svg class="heart-one" viewBox="0 0 100 90"><path fill="#f7a8c4" d="M50 84 12 48C-12 24 22-8 50 20 78-8 112 24 88 48Z"/></svg>
+		<svg class="heart-two" viewBox="0 0 100 90"><path fill="#e989b0" d="M50 84 12 48C-12 24 22-8 50 20 78-8 112 24 88 48Z"/></svg>
+		<svg class="flower" viewBox="0 0 100 100"><g fill="#f3a0bf"><circle cx="50" cy="22" r="17"/><circle cx="75" cy="40" r="17"/><circle cx="65" cy="69" r="17"/><circle cx="35" cy="69" r="17"/><circle cx="25" cy="40" r="17"/></g><circle cx="50" cy="47" r="14" fill="#ffd166"/></svg>
+		<svg class="sparkle" viewBox="0 0 60 60"><path fill="#f2a2c0" d="M30 0 36 22 58 30 36 36 30 60 23 37 2 30 23 23Z"/></svg>
+		<svg class="heart-three" viewBox="0 0 100 90"><path fill="#ffc2d7" d="M50 84 12 48C-12 24 22-8 50 20 78-8 112 24 88 48Z"/></svg>
+		<svg class="heart-four" viewBox="0 0 100 90"><path fill="#f7a8c4" d="M50 84 12 48C-12 24 22-8 50 20 78-8 112 24 88 48Z"/></svg>
+		<svg class="flower-small" viewBox="0 0 100 100"><g fill="#ffc2d7"><circle cx="50" cy="22" r="17"/><circle cx="75" cy="40" r="17"/><circle cx="65" cy="69" r="17"/><circle cx="35" cy="69" r="17"/><circle cx="25" cy="40" r="17"/></g><circle cx="50" cy="47" r="14" fill="#ffe08a"/></svg>
+		<svg class="sparkle-two" viewBox="0 0 60 60"><path fill="#f2a2c0" d="M30 0 36 22 58 30 36 36 30 60 23 37 2 30 23 23Z"/></svg>
+		<svg class="sparkle-three" viewBox="0 0 60 60"><path fill="#ffd166" d="M30 0 36 22 58 30 36 36 30 60 23 37 2 30 23 23Z"/></svg>
+	</div>
+	<main>
+		<h1>Bạn có phải là Mai béo không?</h1>
+		<div class="buttons">
+			<button id="yes" type="button" onclick="window.location.href='maibeo.html'">Đúng, tôi là con béo đó</button>
+			<button id="no" type="button">T đâu có béo!</button>
+		</div>
+	</main>
+	<script>
+		const noButton = document.getElementById('no');
+		let noButtonHasMoved = false;
+		function moveNoButton() {
+			const maxX = Math.max(0, window.innerWidth - noButton.offsetWidth);
+			const maxY = Math.max(0, window.innerHeight - noButton.offsetHeight);
+			noButton.style.left = `${Math.random() * maxX}px`;
+			noButton.style.top = `${Math.random() * maxY}px`;
+		}
+		noButton.addEventListener('pointerenter', () => {
+			if (!noButtonHasMoved) {
+				const rect = noButton.getBoundingClientRect();
+				noButton.style.transition = 'none';
+			noButton.style.position = 'fixed';
+				noButton.style.left = `${rect.left}px`;
+				noButton.style.top = `${rect.top}px`;
+				void noButton.offsetWidth;
+				noButtonHasMoved = true;
+				requestAnimationFrame(() => {
+					noButton.style.removeProperty('transition');
+					moveNoButton();
+				});
+				return;
+			}
+			moveNoButton();
+		});
+	</script>
+</body>
+</html>
